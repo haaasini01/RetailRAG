@@ -1,0 +1,14 @@
+[
+  {"query": "What is the capital of France?", "type": "out_of_corpus"},
+  {"query": "How do I repair a bicycle chain?", "type": "out_of_corpus"},
+  {"query": "What is the StoreGuide company headquarters address?", "type": "out_of_corpus"},
+  {"query": "What is the weather tomorrow?", "type": "out_of_corpus"},
+  {"query": "Can you help me choose a university?", "type": "out_of_corpus"},
+  {"query": "How can I lower my mortgage interest rate?", "type": "out_of_corpus"},
+  {"query": "What is the CEO name and phone number?", "type": "out_of_corpus"},
+  {"query": "Does the store offer appliance installation?", "type": "out_of_corpus"},
+  {"query": "Do you offer gift wrapping?", "type": "out_of_corpus"},
+  {"query": "Can you match a competitor's price?", "type": "out_of_corpus"},
+  {"query": "What hours is your retail shop open?", "type": "out_of_corpus"},
+  {"query": "How do I troubleshoot an internet router?", "type": "out_of_corpus"}
+]

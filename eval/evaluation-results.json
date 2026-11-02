@@ -1,0 +1,476 @@
+{
+  "queries": 30,
+  "in_corpus_queries": 18,
+  "out_of_corpus_queries": 12,
+  "k": 5,
+  "hit_rate": 1.0,
+  "mrr": 0.9722,
+  "recall_at_k": 1.0,
+  "refusal_accuracy": 1.0,
+  "in_corpus_acceptance": 1.0,
+  "min_relevance_score": 0.6,
+  "min_query_term_coverage": 0.6,
+  "hit_rate_threshold": 0.9,
+  "refusal_threshold": 1.0,
+  "in_corpus_acceptance_threshold": 0.95,
+  "passed": true,
+  "gate_failures": [],
+  "per_query": [
+    {
+      "query": "How long does standard shipping take?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "shipping"
+      ],
+      "ranked_article_ids": [
+        "shipping",
+        "returns-refunds",
+        "order-tracking",
+        "damaged-items",
+        "order-changes"
+      ],
+      "top_score": 0.8289,
+      "query_term_coverage": 0.6667,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Do I get free delivery if my subtotal is $55?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "shipping"
+      ],
+      "ranked_article_ids": [
+        "shipping",
+        "payment-methods",
+        "order-tracking",
+        "order-changes",
+        "damaged-items"
+      ],
+      "top_score": 0.6164,
+      "query_term_coverage": 0.75,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can you ship my order to a PO box using express?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "shipping"
+      ],
+      "ranked_article_ids": [
+        "order-tracking",
+        "shipping",
+        "order-changes",
+        "payment-methods",
+        "damaged-items"
+      ],
+      "top_score": 0.6276,
+      "query_term_coverage": 0.6667,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 0.5,
+      "recall": 1.0
+    },
+    {
+      "query": "Where can I see my parcel tracking link?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-tracking"
+      ],
+      "ranked_article_ids": [
+        "order-tracking",
+        "order-changes",
+        "account-help",
+        "damaged-items",
+        "payment-methods"
+      ],
+      "top_score": 0.744,
+      "query_term_coverage": 0.75,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Tracking has not updated since dispatch; what should I do?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-tracking"
+      ],
+      "ranked_article_ids": [
+        "order-tracking",
+        "order-changes",
+        "damaged-items",
+        "account-help",
+        "returns-refunds"
+      ],
+      "top_score": 0.7575,
+      "query_term_coverage": 0.6667,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How many days do I have to return an unused item?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "returns-refunds"
+      ],
+      "ranked_article_ids": [
+        "returns-refunds",
+        "damaged-items",
+        "account-help",
+        "order-tracking",
+        "order-changes"
+      ],
+      "top_score": 0.8153,
+      "query_term_coverage": 0.8333,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "When will my card provider post an approved refund?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "returns-refunds"
+      ],
+      "ranked_article_ids": [
+        "returns-refunds",
+        "payment-methods",
+        "damaged-items",
+        "order-changes",
+        "gift-cards"
+      ],
+      "top_score": 0.695,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can I return an item marked final sale?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "returns-refunds"
+      ],
+      "ranked_article_ids": [
+        "returns-refunds",
+        "order-changes",
+        "damaged-items",
+        "payment-methods",
+        "order-tracking"
+      ],
+      "top_score": 0.726,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can I cancel the order while it is still processing?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-changes"
+      ],
+      "ranked_article_ids": [
+        "order-changes",
+        "damaged-items",
+        "order-tracking",
+        "payment-methods",
+        "returns-refunds"
+      ],
+      "top_score": 0.773,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How do I change an order that has already shipped?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-changes"
+      ],
+      "ranked_article_ids": [
+        "order-changes",
+        "order-tracking",
+        "damaged-items",
+        "payment-methods",
+        "returns-refunds"
+      ],
+      "top_score": 0.7081,
+      "query_term_coverage": 0.6,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "A product arrived broken. What details should I send?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "damaged-items"
+      ],
+      "ranked_article_ids": [
+        "damaged-items",
+        "returns-refunds",
+        "order-changes",
+        "order-tracking",
+        "payment-methods"
+      ],
+      "top_score": 0.7841,
+      "query_term_coverage": 0.6,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Should I mail a damaged item back before contacting support?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "damaged-items"
+      ],
+      "ranked_article_ids": [
+        "damaged-items",
+        "returns-refunds",
+        "order-changes",
+        "account-help",
+        "order-tracking"
+      ],
+      "top_score": 0.82,
+      "query_term_coverage": 0.8333,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Which credit cards can I use at checkout?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "payment-methods"
+      ],
+      "ranked_article_ids": [
+        "payment-methods",
+        "gift-cards",
+        "order-changes",
+        "returns-refunds",
+        "order-tracking"
+      ],
+      "top_score": 0.7975,
+      "query_term_coverage": 0.75,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Why do I see a pending authorization on my bank account?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "payment-methods"
+      ],
+      "ranked_article_ids": [
+        "payment-methods",
+        "account-help",
+        "order-tracking",
+        "gift-cards",
+        "returns-refunds"
+      ],
+      "top_score": 0.6819,
+      "query_term_coverage": 0.8,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How do I reset my forgotten password?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "account-help"
+      ],
+      "ranked_article_ids": [
+        "account-help",
+        "gift-cards",
+        "payment-methods",
+        "returns-refunds",
+        "damaged-items"
+      ],
+      "top_score": 0.7762,
+      "query_term_coverage": 0.6667,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "What should I do if the reset email does not arrive?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "account-help"
+      ],
+      "ranked_article_ids": [
+        "account-help",
+        "damaged-items",
+        "returns-refunds",
+        "order-changes",
+        "order-tracking"
+      ],
+      "top_score": 0.7536,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How do I redeem a gift card at checkout?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "gift-cards"
+      ],
+      "ranked_article_ids": [
+        "gift-cards",
+        "payment-methods",
+        "account-help",
+        "returns-refunds",
+        "damaged-items"
+      ],
+      "top_score": 0.7945,
+      "query_term_coverage": 0.75,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can I exchange a gift card balance for cash?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "gift-cards"
+      ],
+      "ranked_article_ids": [
+        "gift-cards",
+        "payment-methods",
+        "returns-refunds",
+        "damaged-items",
+        "account-help"
+      ],
+      "top_score": 0.7532,
+      "query_term_coverage": 0.8,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "What is the capital of France?",
+      "type": "out_of_corpus",
+      "top_score": 0.4223,
+      "query_term_coverage": 0.0,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "How do I repair a bicycle chain?",
+      "type": "out_of_corpus",
+      "top_score": 0.5733,
+      "query_term_coverage": 0.0,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "What is the StoreGuide company headquarters address?",
+      "type": "out_of_corpus",
+      "top_score": 0.5277,
+      "query_term_coverage": 0.5,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "What is the weather tomorrow?",
+      "type": "out_of_corpus",
+      "top_score": 0.4946,
+      "query_term_coverage": 0.0,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "Can you help me choose a university?",
+      "type": "out_of_corpus",
+      "top_score": 0.5277,
+      "query_term_coverage": 0.3333,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "How can I lower my mortgage interest rate?",
+      "type": "out_of_corpus",
+      "top_score": 0.5431,
+      "query_term_coverage": 0.0,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "What is the CEO name and phone number?",
+      "type": "out_of_corpus",
+      "top_score": 0.5455,
+      "query_term_coverage": 0.25,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "Does the store offer appliance installation?",
+      "type": "out_of_corpus",
+      "top_score": 0.5744,
+      "query_term_coverage": 0.0,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "Do you offer gift wrapping?",
+      "type": "out_of_corpus",
+      "top_score": 0.6464,
+      "query_term_coverage": 0.5,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "Can you match a competitor's price?",
+      "type": "out_of_corpus",
+      "top_score": 0.575,
+      "query_term_coverage": 0.0,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "What hours is your retail shop open?",
+      "type": "out_of_corpus",
+      "top_score": 0.5832,
+      "query_term_coverage": 0.25,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "How do I troubleshoot an internet router?",
+      "type": "out_of_corpus",
+      "top_score": 0.6338,
+      "query_term_coverage": 0.0,
+      "refused": true,
+      "correct": true
+    }
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "queries": 18,
+  "k": 5,
+  "hit_rate": 1.0,
+  "mrr": 0.9722,
+  "recall_at_k": 1.0,
+  "per_query": [
+    {
+      "query": "How long does standard shipping take?",
+      "expected_article_ids": [
+        "shipping"
+      ],
+      "ranked_article_ids": [
+        "shipping",
+        "returns-refunds",
+        "order-tracking",
+        "damaged-items",
+        "order-changes"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Do I get free delivery if my subtotal is $55?",
+      "expected_article_ids": [
+        "shipping"
+      ],
+      "ranked_article_ids": [
+        "shipping",
+        "payment-methods",
+        "order-tracking",
+        "order-changes",
+        "damaged-items"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can you ship my order to a PO box using express?",
+      "expected_article_ids": [
+        "shipping"
+      ],
+      "ranked_article_ids": [
+        "order-tracking",
+        "shipping",
+        "order-changes",
+        "payment-methods",
+        "damaged-items"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 0.5,
+      "recall": 1.0
+    },
+    {
+      "query": "Where can I see my parcel tracking link?",
+      "expected_article_ids": [
+        "order-tracking"
+      ],
+      "ranked_article_ids": [
+        "order-tracking",
+        "order-changes",
+        "account-help",
+        "damaged-items",
+        "payment-methods"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Tracking has not updated since dispatch; what should I do?",
+      "expected_article_ids": [
+        "order-tracking"
+      ],
+      "ranked_article_ids": [
+        "order-tracking",
+        "order-changes",
+        "damaged-items",
+        "account-help",
+        "returns-refunds"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How many days do I have to return an unused item?",
+      "expected_article_ids": [
+        "returns-refunds"
+      ],
+      "ranked_article_ids": [
+        "returns-refunds",
+        "damaged-items",
+        "account-help",
+        "order-tracking",
+        "order-changes"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "When will my card provider post an approved refund?",
+      "expected_article_ids": [
+        "returns-refunds"
+      ],
+      "ranked_article_ids": [
+        "returns-refunds",
+        "payment-methods",
+        "damaged-items",
+        "order-changes",
+        "gift-cards"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can I return an item marked final sale?",
+      "expected_article_ids": [
+        "returns-refunds"
+      ],
+      "ranked_article_ids": [
+        "returns-refunds",
+        "order-changes",
+        "damaged-items",
+        "payment-methods",
+        "order-tracking"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can I cancel the order while it is still processing?",
+      "expected_article_ids": [
+        "order-changes"
+      ],
+      "ranked_article_ids": [
+        "order-changes",
+        "damaged-items",
+        "order-tracking",
+        "payment-methods",
+        "returns-refunds"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How do I change an order that has already shipped?",
+      "expected_article_ids": [
+        "order-changes"
+      ],
+      "ranked_article_ids": [
+        "order-changes",
+        "order-tracking",
+        "damaged-items",
+        "payment-methods",
+        "returns-refunds"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "A product arrived broken. What details should I send?",
+      "expected_article_ids": [
+        "damaged-items"
+      ],
+      "ranked_article_ids": [
+        "damaged-items",
+        "returns-refunds",
+        "order-changes",
+        "order-tracking",
+        "payment-methods"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Should I mail a damaged item back before contacting support?",
+      "expected_article_ids": [
+        "damaged-items"
+      ],
+      "ranked_article_ids": [
+        "damaged-items",
+        "returns-refunds",
+        "order-changes",
+        "account-help",
+        "order-tracking"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Which credit cards can I use at checkout?",
+      "expected_article_ids": [
+        "payment-methods"
+      ],
+      "ranked_article_ids": [
+        "payment-methods",
+        "gift-cards",
+        "order-changes",
+        "returns-refunds",
+        "order-tracking"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Why do I see a pending authorization on my bank account?",
+      "expected_article_ids": [
+        "payment-methods"
+      ],
+      "ranked_article_ids": [
+        "payment-methods",
+        "account-help",
+        "order-tracking",
+        "gift-cards",
+        "returns-refunds"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How do I reset my forgotten password?",
+      "expected_article_ids": [
+        "account-help"
+      ],
+      "ranked_article_ids": [
+        "account-help",
+        "gift-cards",
+        "payment-methods",
+        "returns-refunds",
+        "damaged-items"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "What should I do if the reset email does not arrive?",
+      "expected_article_ids": [
+        "account-help"
+      ],
+      "ranked_article_ids": [
+        "account-help",
+        "damaged-items",
+        "returns-refunds",
+        "order-changes",
+        "order-tracking"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How do I redeem a gift card at checkout?",
+      "expected_article_ids": [
+        "gift-cards"
+      ],
+      "ranked_article_ids": [
+        "gift-cards",
+        "payment-methods",
+        "account-help",
+        "returns-refunds",
+        "damaged-items"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can I exchange a gift card balance for cash?",
+      "expected_article_ids": [
+        "gift-cards"
+      ],
+      "ranked_article_ids": [
+        "gift-cards",
+        "payment-methods",
+        "returns-refunds",
+        "damaged-items",
+        "account-help"
+      ],
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    }
+  ]
+}

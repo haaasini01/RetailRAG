@@ -1,0 +1,20 @@
+[
+  {"query": "How long does standard shipping take?", "expected_article_ids": ["shipping"]},
+  {"query": "Do I get free delivery if my subtotal is $55?", "expected_article_ids": ["shipping"]},
+  {"query": "Can you ship my order to a PO box using express?", "expected_article_ids": ["shipping"]},
+  {"query": "Where can I see my parcel tracking link?", "expected_article_ids": ["order-tracking"]},
+  {"query": "Tracking has not updated since dispatch; what should I do?", "expected_article_ids": ["order-tracking"]},
+  {"query": "How many days do I have to return an unused item?", "expected_article_ids": ["returns-refunds"]},
+  {"query": "When will my card provider post an approved refund?", "expected_article_ids": ["returns-refunds"]},
+  {"query": "Can I return an item marked final sale?", "expected_article_ids": ["returns-refunds"]},
+  {"query": "Can I cancel the order while it is still processing?", "expected_article_ids": ["order-changes"]},
+  {"query": "How do I change an order that has already shipped?", "expected_article_ids": ["order-changes"]},
+  {"query": "A product arrived broken. What details should I send?", "expected_article_ids": ["damaged-items"]},
+  {"query": "Should I mail a damaged item back before contacting support?", "expected_article_ids": ["damaged-items"]},
+  {"query": "Which credit cards can I use at checkout?", "expected_article_ids": ["payment-methods"]},
+  {"query": "Why do I see a pending authorization on my bank account?", "expected_article_ids": ["payment-methods"]},
+  {"query": "How do I reset my forgotten password?", "expected_article_ids": ["account-help"]},
+  {"query": "What should I do if the reset email does not arrive?", "expected_article_ids": ["account-help"]},
+  {"query": "How do I redeem a gift card at checkout?", "expected_article_ids": ["gift-cards"]},
+  {"query": "Can I exchange a gift card balance for cash?", "expected_article_ids": ["gift-cards"]}
+]

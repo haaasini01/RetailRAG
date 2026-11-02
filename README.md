@@ -27,9 +27,12 @@ Open `http://127.0.0.1:8000/` for the support chat. `GET /health` is the
 liveness check; `GET /ready` checks PostgreSQL, indexed chunks, and both required
 Ollama models. Run tests with `python -m pytest`.
 
-The original fictional store policies are in `data/kb/`. Each Markdown file has
-YAML front matter containing a unique slug `id`, a `title`, and a slug `category`.
-Ingestion validates the metadata, splits article text into overlapping
+The original fictional Pine & Peak Market policies are in `data/kb/`. They
+intentionally include interacting timelines, conditional exceptions, shipping
+thresholds, return exclusions, warranty limits, and account-specific questions;
+the fictional policies are test material, not real consumer advice. Each Markdown
+file has YAML front matter containing a unique slug `id`, a `title`, and a slug
+`category`. Ingestion validates the metadata, splits article text into overlapping
 word-bounded chunks, creates 768-dimensional `nomic-embed-text` document vectors
 through Ollama, and synchronizes articles and chunks in one database transaction.
 Running it again updates changed documents and removes articles whose files were
@@ -37,11 +40,40 @@ deleted. The database is available on localhost port 5433; local development
 credentials are in `.env.example`. The Ollama service must be running locally.
 
 The retrieval baseline uses query-prefixed `nomic-embed-text` embeddings and
-PostgreSQL pgvector cosine search. The 18 labeled questions live in
-`eval/retrieval_cases.json`. Run `python -m storeguide.evaluation` to recalculate
-Hit Rate@5, MRR, Recall@5, in-corpus acceptance, and out-of-corpus refusal accuracy;
-the command writes per-question results to `eval/evaluation-results.json`. The
-baseline-only 18-question result is stored in `eval/baseline-vector-results.json`.
+PostgreSQL pgvector cosine search. Live retrieval now follows the architecture
+shown in the project diagram:
+
+1. Retrieve up to 20 candidates independently with pgvector cosine similarity
+   and BM25 lexical ranking.
+2. Combine the two ranked lists with reciprocal-rank fusion (RRF, rank constant
+   60), deduplicating by chunk ID.
+3. Rerank the fused candidate pool with the `BAAI/bge-reranker-base`
+   cross-encoder. This model scores query/passage pairs; it does not replace
+   `nomic-embed-text` or the answer model.
+4. Keep the top five reranked passages. Apply the evidence gate, then ask local
+   Ollama `gemma4:e4b` to produce a grounded answer with validated citations—or
+   abstain.
+
+The reranker outputs a logit which is converted through a sigmoid to a
+0–1 relevance score; `MIN_RELEVANCE_SCORE` applies to that reranker score. The
+current provisional score threshold is `0.002`, calibrated against this test
+set after adding explicit competitor-price policy language. Do not reuse the
+old cosine-similarity threshold for cross-encoder scores.
+`GET /ready` initializes and verifies the cross-encoder as well as PostgreSQL
+and Ollama. On first startup, FastEmbed downloads the BGE model (about 1 GB) from
+Hugging Face into `RERANKER_CACHE_DIR` (`model-cache/` by default); allow time
+and network access on that first readiness check. Docker Compose keeps the model
+in a named volume.
+
+The 48 supported policy questions and 16 unsupported or tool-required questions
+(64 total) live in `eval/`. Run
+`python -m storeguide.evaluation` to recalculate Hit Rate@5, MRR, Recall@5,
+in-corpus acceptance, and out-of-corpus refusal accuracy; the command writes
+per-question results to `eval/evaluation-results.json`. Seven cases require
+account/order-specific lookup or action tools. RetailRAG has no such tools, so it
+routes those requests to a deterministic sign-in/support response instead of
+guessing from policy text. The original 18-question baseline is stored in
+`eval/baseline-vector-results.json`.
 Search one question with
 `python -m storeguide.retrieve "How long does standard shipping take?"`.
 
@@ -54,12 +86,14 @@ retrieved chunks, refusal rate, and model counts from that JSONL file. The chat
 page uses same-origin requests and does not send questions to any third-party
 service; the typefaces use local system fonts.
 
-The retrieval gate requires both cosine similarity of at least `0.60` and
-meaningful query-term coverage of at least `0.60` across retrieved passages. These
-initial thresholds separate the current 18 supported and 12 unsupported evaluation
-questions; add representative cases before treating them as production-calibrated.
-CI runs the unit suite plus the retrieval/refusal regression evaluation against
-PostgreSQL and the local Ollama embedding model.
+The retrieval gate requires both reranker relevance of at least `0.002` and
+normalized query-term coverage of at least `0.60` across the reranked passages.
+These provisional thresholds pass the current 64-case regression set but are
+not production-calibrated. The questions were
+authored alongside the fictional policies, so a separate held-out set is needed
+for an unbiased quality estimate.
+CI runs the unit suite plus the hybrid retrieval/refusal regression evaluation
+against PostgreSQL, Ollama embeddings, BM25, and the cross-encoder.
 
 ## Run the full stack with Docker Compose
 

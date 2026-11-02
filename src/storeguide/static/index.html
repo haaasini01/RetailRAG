@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f4f0">
+    <title>RetailRAG — RAG-Powered Store Support</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/chat.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="RetailRAG home">
+          <span class="brand-mark" aria-hidden="true">R</span>
+          <span>RetailRAG</span>
+        </a>
+        <span class="status"><span class="status-dot"></span> RAG support assistant</span>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">CUSTOMER CARE</p>
+        <h1 id="page-title">How can we help?</h1>
+        <p class="intro-copy">Ask about orders, shipping, returns, payments, or your account.</p>
+      </section>
+
+      <section class="chat-card" aria-label="Support conversation">
+        <div id="conversation" class="conversation" aria-live="polite">
+          <article class="message assistant-message">
+            <div class="avatar" aria-hidden="true">R</div>
+            <div class="message-body">
+              <p class="message-label">RetailRAG</p>
+              <div class="bubble">
+                <p>Hi there! I can help with questions covered by our store policies. I’ll include the sources I use.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <form id="chat-form" class="composer">
+          <label class="sr-only" for="message">Your question</label>
+          <textarea id="message" name="message" rows="2" maxlength="2000"
+            placeholder="Ask a question about your order..." required></textarea>
+          <div class="composer-footer">
+            <p>RetailRAG retrieves store policies to ground answers and may not know every answer.</p>
+            <button id="send-button" type="submit">
+              <span>Send</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <footer class="footer">Fictional store policies · Answers include supporting sources</footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-storeguide}
+      POSTGRES_USER: ${POSTGRES_USER:-storeguide}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-storeguide}
+    ports:
+      - "5433:5432"
+    volumes:
+      - storeguide-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-storeguide} -d ${POSTGRES_DB:-storeguide}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  app:
+    build: .
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8000
+      DATABASE_URL: postgresql://${POSTGRES_USER:-storeguide}:${POSTGRES_PASSWORD:-storeguide}@db:5432/${POSTGRES_DB:-storeguide}
+      KB_DIR: /app/data/kb
+      LOG_FILE: /app/logs/requests.jsonl
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL_DOCKER:-http://host.docker.internal:11434}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-nomic-embed-text}
+      EMBEDDING_DIMENSIONS: ${EMBEDDING_DIMENSIONS:-768}
+      GENERATION_MODEL: ${GENERATION_MODEL:-gemma4:e4b}
+      MIN_RELEVANCE_SCORE: ${MIN_RELEVANCE_SCORE:-0.60}
+      MIN_QUERY_TERM_COVERAGE: ${MIN_QUERY_TERM_COVERAGE:-0.60}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./logs:/app/logs
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/ready"]
+      interval: 30s
+      timeout: 8s
+      start_period: 30s
+      retries: 3
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["ollama"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  storeguide-postgres-data:
+  ollama-models:

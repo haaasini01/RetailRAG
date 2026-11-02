@@ -1,0 +1,55 @@
+name: RetailRAG checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-evaluate:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_DB: storeguide
+          POSTGRES_USER: storeguide
+          POSTGRES_PASSWORD: storeguide
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U storeguide -d storeguide"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://storeguide:storeguide@localhost:5432/storeguide
+      OLLAMA_BASE_URL: http://127.0.0.1:11434
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install project
+        run: python -m pip install -e ".[dev]"
+      - name: Start Ollama and download embedding model
+        shell: bash
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          OLLAMA_HOST=127.0.0.1:11434 nohup ollama serve >/tmp/storeguide-ollama.log 2>&1 &
+          for attempt in {1..60}; do
+            if curl -fsS http://127.0.0.1:11434/api/tags >/dev/null; then
+              break
+            fi
+            sleep 2
+          done
+          curl -fsS http://127.0.0.1:11434/api/tags >/dev/null
+          ollama pull nomic-embed-text
+      - name: Run unit tests
+        run: python -m pytest
+      - name: Ingest policies and run regression evaluation
+        run: |
+          python -m storeguide.ingest
+          python -m storeguide.evaluation --top-k 5

@@ -1,0 +1,1 @@
+"""RetailRAG support assistant."""

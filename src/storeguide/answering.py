@@ -14,9 +14,18 @@ from storeguide.config import (
     MIN_QUERY_TERM_COVERAGE,
     OLLAMA_BASE_URL,
 )
-from storeguide.retrieval import PgVectorRetriever, SearchHit, query_term_coverage
+from storeguide.hybrid_search import HybridRetriever
+from storeguide.intents import requires_account_lookup
+from storeguide.retrieval import SearchHit, query_term_coverage
 
-REFUSAL_MESSAGE = "I do not have enough information in the store policies to answer that."
+REFUSAL_MESSAGE = (
+    "I do not have enough information in the store policies to answer that. "
+    "Please contact support for help."
+)
+LOOKUP_REQUIRED_MESSAGE = (
+    "I can explain the store policies, but I cannot look up or change account-specific "
+    "information here. Please sign in or contact support."
+)
 _CITATION_PATTERN = re.compile(r"\[([a-z0-9]+(?:-[a-z0-9]+)*)\]")
 _SYSTEM_PROMPT = f"""You are RetailRAG, a retrieval-augmented customer-support
 assistant for a fictional online store. Answer the customer's question using only
@@ -131,16 +140,33 @@ class AnswerService:
             raise ValueError("min_query_term_coverage must be between 0 and 1")
         if top_k < 1:
             raise ValueError("top_k must be a positive integer")
-        self._retriever = retriever or PgVectorRetriever()
+        self._retriever = retriever or HybridRetriever()
         self._generator = generator
         self._min_relevance_score = min_relevance_score
         self._min_query_term_coverage = min_query_term_coverage
         self._top_k = top_k
 
+    def warmup(self) -> None:
+        if isinstance(self._retriever, HybridRetriever):
+            self._retriever.warmup()
+
     def answer(self, query: str) -> ChatAnswer:
         if not query.strip():
             raise ValueError("Query must not be empty")
         started = time.perf_counter()
+        if requires_account_lookup(query):
+            return ChatAnswer(
+                answer=LOOKUP_REQUIRED_MESSAGE,
+                citations=[],
+                sources=[],
+                model="none",
+                grounded=False,
+                refused=True,
+                retrieved_count=0,
+                top_score=0.0,
+                query_term_coverage=0.0,
+                latency_ms=round((time.perf_counter() - started) * 1000, 2),
+            )
         sources = self._retriever.search(query, top_k=self._top_k)
         term_coverage = query_term_coverage(query, sources)
         top_score = sources[0].score if sources else 0.0

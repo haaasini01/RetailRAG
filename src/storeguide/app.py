@@ -17,6 +17,7 @@ from storeguide.config import (
     GENERATION_MODEL,
     LOG_FILE,
     OLLAMA_BASE_URL,
+    RERANKER_MODEL,
 )
 from storeguide.observability import chat_event, load_metrics, now_iso, write_event
 
@@ -178,11 +179,19 @@ def create_app(
                 status_code=503,
                 detail="One or more required Ollama models are not installed",
             )
+        try:
+            service.warmup()
+        except (httpx.HTTPError, OSError, RuntimeError, ValueError) as exc:
+            logger.exception("Cross-encoder readiness check failed")
+            raise HTTPException(
+                status_code=503, detail="The cross-encoder reranker is unavailable"
+            ) from exc
         return {
             "status": "ready",
             "indexed_chunks": indexed_chunks,
             "embedding_model": EMBEDDING_MODEL,
             "generation_model": GENERATION_MODEL,
+            "reranker_model": RERANKER_MODEL,
         }
 
     @application.get("/metrics")

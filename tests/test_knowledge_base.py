@@ -10,12 +10,12 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 def test_loads_store_articles_with_source_metadata() -> None:
     articles = load_articles(PROJECT_ROOT / "data" / "kb")
 
-    assert len(articles) == 8
+    assert len(articles) == 9
     shipping = next(article for article in articles if article.id == "shipping")
-    assert shipping.title == "Shipping and delivery"
+    assert shipping.title == "Shipping, delivery estimates, and charges"
     assert shipping.category == "orders"
     assert shipping.source_path == "shipping.md"
-    assert "three to five business days" in shipping.body
+    assert "four to six business days" in shipping.body
     assert len(shipping.content_sha256) == 64
 
 

@@ -41,6 +41,7 @@ def read_path(name: str, default: str) -> Path:
 DATABASE_URL = os.getenv("DATABASE_URL", "")
 KB_DIR = read_path("KB_DIR", "data/kb")
 LOG_FILE = read_path("LOG_FILE", "logs/requests.jsonl")
+RERANKER_CACHE_DIR = read_path("RERANKER_CACHE_DIR", "model-cache")
 CHUNK_TARGET_WORDS = read_positive_int("CHUNK_TARGET_WORDS", 180)
 CHUNK_OVERLAP_WORDS = read_positive_int("CHUNK_OVERLAP_WORDS", 40)
 if CHUNK_OVERLAP_WORDS >= CHUNK_TARGET_WORDS:
@@ -53,6 +54,7 @@ if EMBEDDING_DIMENSIONS != 768:
     raise ValueError("EMBEDDING_DIMENSIONS must be 768 for nomic-embed-text and the DB schema")
 GENERATION_MODEL = os.getenv("GENERATION_MODEL", "gemma4:e4b")
 GENERATION_TIMEOUT_SECONDS = read_positive_int("GENERATION_TIMEOUT_SECONDS", 180)
+RERANKER_MODEL = os.getenv("RERANKER_MODEL", "BAAI/bge-reranker-base")
 
 
 def read_metric_threshold(name: str, default: float) -> float:
@@ -67,7 +69,7 @@ def read_metric_threshold(name: str, default: float) -> float:
 
 
 def read_score_threshold() -> float:
-    value = os.getenv("MIN_RELEVANCE_SCORE", "0.60")
+    value = os.getenv("MIN_RELEVANCE_SCORE", "0.002")
     try:
         score = float(value)
     except ValueError as exc:

@@ -5,6 +5,7 @@ import httpx
 import pytest
 
 from storeguide.answering import (
+    LOOKUP_REQUIRED_MESSAGE,
     REFUSAL_MESSAGE,
     AnswerService,
     OllamaChatGenerator,
@@ -18,7 +19,7 @@ def _hit(article_id: str = "shipping", score: float = 0.8) -> SearchHit:
         article_id=article_id,
         title="Shipping",
         category="orders",
-        content="Standard shipping takes three to five business days.",
+        content="Standard shipping transit is usually four to six business days after carrier pickup.",
         score=score,
     )
 
@@ -26,9 +27,11 @@ def _hit(article_id: str = "shipping", score: float = 0.8) -> SearchHit:
 @dataclass
 class _Retriever:
     hits: list[SearchHit]
+    calls: int = 0
 
     def search(self, query: str, top_k: int = 5) -> list[SearchHit]:
         assert query
+        self.calls += 1
         return self.hits[:top_k]
 
 
@@ -45,7 +48,7 @@ class _Generator:
 
 
 def test_service_generates_answer_with_retrieved_citations() -> None:
-    generator = _Generator("Standard shipping takes 3-5 business days. [shipping]")
+    generator = _Generator("Standard shipping takes 4-6 business days after pickup. [shipping]")
     service = AnswerService(_Retriever([_hit()]), generator, min_relevance_score=0.6)
 
     answer = service.answer("How does standard shipping work?")
@@ -78,6 +81,18 @@ def test_service_abstains_when_no_sources_are_found() -> None:
     assert answer.citations == []
 
 
+def test_service_does_not_answer_account_specific_questions_from_policy_text() -> None:
+    retriever = _Retriever([])
+    answer = AnswerService(retriever, _Generator("unused")).answer(
+        "Has my order 84721 shipped?"
+    )
+
+    assert answer.answer == LOOKUP_REQUIRED_MESSAGE
+    assert answer.refused is True
+    assert answer.retrieved_count == 0
+    assert retriever.calls == 0
+
+
 def test_service_abstains_when_query_terms_are_missing_from_evidence() -> None:
     generator = _Generator("This must not be generated.")
     service = AnswerService(_Retriever([_hit(score=0.8)]), generator, 0.6)
@@ -91,7 +106,7 @@ def test_service_abstains_when_query_terms_are_missing_from_evidence() -> None:
 def test_service_rejects_answer_without_a_valid_source_citation() -> None:
     service = AnswerService(
         _Retriever([_hit()]),
-        _Generator("Standard shipping takes three to five business days."),
+        _Generator("Standard shipping takes four to six business days."),
         min_relevance_score=0.6,
     )
 
@@ -100,7 +115,7 @@ def test_service_rejects_answer_without_a_valid_source_citation() -> None:
 
 
 def test_service_ignores_citations_not_in_retrieved_sources() -> None:
-    generator = _Generator("Delivery takes 3-5 days [unknown] [shipping].")
+    generator = _Generator("Delivery takes 4-6 days [unknown] [shipping].")
     answer = AnswerService(
         _Retriever([_hit()]),
         generator,
@@ -118,7 +133,12 @@ def test_generator_sends_only_retrieved_policy_context() -> None:
         requests.append(json.loads(request.content))
         return httpx.Response(
             200,
-            json={"message": {"role": "assistant", "content": "3-5 business days [shipping]"}},
+            json={
+                "message": {
+                    "role": "assistant",
+                    "content": "4-6 business days after pickup [shipping]",
+                }
+            },
         )
 
     client = httpx.Client(
@@ -129,7 +149,7 @@ def test_generator_sends_only_retrieved_policy_context() -> None:
         answer = generator.generate("How long is shipping?", [_hit()])
     client.close()
 
-    assert answer == "3-5 business days [shipping]"
+    assert answer == "4-6 business days after pickup [shipping]"
     assert requests[0]["model"] == "gemma4:e4b"
     assert requests[0]["stream"] is False
     prompt = requests[0]["messages"][1]["content"]

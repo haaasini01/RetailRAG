@@ -59,7 +59,7 @@ def test_evaluate_retrieval_reports_expected_metrics() -> None:
 
 def test_loads_default_labeled_questions() -> None:
     cases = load_cases()
-    assert len(cases) == 18
+    assert len(cases) == 48
 
 
 def test_evaluate_checks_refusal_accuracy() -> None:
@@ -87,6 +87,27 @@ def test_evaluate_fails_gate_when_out_of_domain_query_is_not_refused() -> None:
     assert result["refusal_accuracy"] == 0.0
     assert result["passed"] is False
     assert result["gate_failures"] == ["Refusal accuracy 0.0000 < threshold 1.0000"]
+
+
+def test_evaluate_routes_account_specific_cases_without_retrieval() -> None:
+    result = evaluate_retrieval(
+        [
+            RetrievalCase(
+                query="Has my order 84721 shipped?",
+                expected_article_ids=[],
+                type="out_of_corpus",
+            ),
+            RetrievalCase(
+                query="first",
+                expected_article_ids=["b"],
+            ),
+        ],
+        _Retriever(),
+    )
+
+    assert result["tool_required_queries"] == 1
+    assert result["tool_required_refusal_accuracy"] == 1.0
+    assert result["per_query"][0]["requires_tool"] is True
 
 
 def test_rejects_empty_cases() -> None:

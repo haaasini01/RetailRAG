@@ -9,3 +9,4 @@ __pycache__/
 coverage/
 *.log
 logs/*.jsonl
+model-cache/

@@ -14,7 +14,9 @@ from storeguide.config import (
     MIN_RELEVANCE_SCORE,
     MIN_QUERY_TERM_COVERAGE,
 )
-from storeguide.retrieval import PgVectorRetriever, SearchHit, query_term_coverage
+from storeguide.intents import requires_account_lookup
+from storeguide.hybrid_search import HybridRetriever
+from storeguide.retrieval import SearchHit, query_term_coverage
 
 DEFAULT_CASES = PROJECT_ROOT / "eval" / "retrieval_cases.json"
 DEFAULT_REFUSAL_CASES = PROJECT_ROOT / "eval" / "refusal_cases.json"
@@ -117,7 +119,24 @@ def evaluate_retrieval(
     accepted_in_corpus = 0
     refusal_correct = 0
     refusal_total = 0
+    tool_required_refusals = 0
+    tool_required_total = 0
     for case in cases:
+        if case.type == "out_of_corpus" and requires_account_lookup(case.query):
+            refusal_total += 1
+            tool_required_total += 1
+            tool_required_refusals += 1
+            refusal_correct += 1
+            per_query.append(
+                {
+                    "query": case.query,
+                    "type": case.type,
+                    "requires_tool": True,
+                    "refused": True,
+                    "correct": True,
+                }
+            )
+            continue
         results = retriever.search(case.query, top_k=top_k)
         ranked_ids = [result.article_id for result in results]
         top_score = results[0].score if results else 0.0
@@ -193,6 +212,12 @@ def evaluate_retrieval(
         "queries": len(cases),
         "in_corpus_queries": count,
         "out_of_corpus_queries": refusal_total,
+        "tool_required_queries": tool_required_total,
+        "tool_required_refusal_accuracy": (
+            round(tool_required_refusals / tool_required_total, 4)
+            if tool_required_total
+            else 0.0
+        ),
         "k": top_k,
         "hit_rate": round(hit_rate, 4),
         "mrr": round(sum(reciprocal_ranks) / count, 4),
@@ -223,7 +248,7 @@ def main() -> None:
     args = parser.parse_args()
     result = evaluate_retrieval(
         load_cases(args.cases) + load_cases(args.refusal_cases),
-        retriever=PgVectorRetriever(),
+        retriever=HybridRetriever(),
         top_k=args.top_k,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)

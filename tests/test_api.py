@@ -39,14 +39,16 @@ def test_chat_returns_grounded_answer_with_source_metadata(tmp_path: Path) -> No
     hit = SearchHit(
         chunk_id="shipping:0000",
         article_id="shipping",
-        title="Shipping and delivery",
+        title="Shipping, delivery estimates, and charges",
         category="orders",
-        content="Standard shipping takes three to five business days.",
+        content="Standard shipping takes four to six business days after carrier pickup.",
         score=0.82,
     )
     service = AnswerService(
         retriever=_Retriever([hit]),
-        generator=_Generator("Standard shipping takes three to five business days. [shipping]"),
+        generator=_Generator(
+            "Standard shipping takes four to six business days after pickup. [shipping]"
+        ),
     )
     log_file = tmp_path / "requests.jsonl"
     app = create_app(service, log_file=log_file)
@@ -62,10 +64,14 @@ def test_chat_returns_grounded_answer_with_source_metadata(tmp_path: Path) -> No
 
     assert response.status_code == 200
     payload = response.json()
-    assert payload["answer"] == "Standard shipping takes three to five business days. [shipping]"
+    assert payload["answer"] == "Standard shipping takes four to six business days after pickup. [shipping]"
     assert payload["citations"] == ["shipping"]
     assert payload["sources"] == [
-        {"article_id": "shipping", "title": "Shipping and delivery", "score": 0.82}
+        {
+            "article_id": "shipping",
+            "title": "Shipping, delivery estimates, and charges",
+            "score": 0.82,
+        }
     ]
     assert payload["model"] == "test-generator"
     assert payload["grounded"] is True
@@ -213,6 +219,7 @@ def test_ready_checks_database_chunks_and_required_models(
         "indexed_chunks": 8,
         "embedding_model": "nomic-embed-text",
         "generation_model": "gemma4:e4b",
+        "reranker_model": "BAAI/bge-reranker-base",
     }
 
 

@@ -13,9 +13,40 @@ from storeguide.embeddings import OllamaEmbedder
 _TOKEN_PATTERN = re.compile(r"[a-z0-9]+")
 _QUERY_STOPWORDS = frozenset(
     "a about after all an and are as at be before by can do does for from get how "
-    "i if in is it me my of on or our please should tell that the their this to "
-    "offer take up us was we what when where which who why with you your".split()
+    "have i if in is it long me my need needed of on or our please should tell that "
+    "the their this to offer take up us was we what when where which who why with "
+    "you your usually".split()
 )
+_COVERAGE_SYNONYMS = {
+    "post": "appear",
+    "proof": "receipt",
+    "purchased": "purchase",
+}
+
+
+def _normalize_coverage_term(term: str) -> str:
+    if term in _COVERAGE_SYNONYMS:
+        return _COVERAGE_SYNONYMS[term]
+    if term.endswith("ies") and len(term) > 4:
+        return term[:-3] + "y"
+    if term.endswith("ing") and len(term) > 5:
+        stem = term[:-3]
+        if len(stem) > 2 and stem[-1] == stem[-2]:
+            stem = stem[:-1]
+        return stem
+    if term.endswith("ed") and len(term) > 4:
+        stem = term[:-2]
+        return stem[:-1] + "e" if stem.endswith("s") else stem
+    if term.endswith("s") and not term.endswith(("ss", "us")) and len(term) > 3:
+        return term[:-1]
+    return term
+
+
+def _coverage_terms(text: str) -> set[str]:
+    return {
+        _normalize_coverage_term(token)
+        for token in _TOKEN_PATTERN.findall(text.lower())
+    }
 
 
 @dataclass(frozen=True)
@@ -29,13 +60,15 @@ class SearchHit:
 
 
 def query_term_coverage(query: str, hits: list[SearchHit]) -> float:
-    query_terms = set(_TOKEN_PATTERN.findall(query.lower())) - _QUERY_STOPWORDS
+    query_terms = {
+        _normalize_coverage_term(term)
+        for term in _TOKEN_PATTERN.findall(query.lower())
+        if term not in _QUERY_STOPWORDS
+    }
     if not query_terms:
         return 0.0
-    evidence_terms = set(
-        _TOKEN_PATTERN.findall(
-            " ".join(f"{hit.title} {hit.content}" for hit in hits).lower()
-        )
+    evidence_terms = _coverage_terms(
+        " ".join(f"{hit.title} {hit.content}" for hit in hits)
     )
     return len(query_terms & evidence_terms) / len(query_terms)
 

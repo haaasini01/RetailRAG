@@ -1,14 +1,16 @@
 {
-  "queries": 30,
-  "in_corpus_queries": 18,
-  "out_of_corpus_queries": 12,
+  "queries": 64,
+  "in_corpus_queries": 48,
+  "out_of_corpus_queries": 16,
+  "tool_required_queries": 7,
+  "tool_required_refusal_accuracy": 1.0,
   "k": 5,
   "hit_rate": 1.0,
-  "mrr": 0.9722,
-  "recall_at_k": 1.0,
+  "mrr": 0.9792,
+  "recall_at_k": 0.9896,
   "refusal_accuracy": 1.0,
   "in_corpus_acceptance": 1.0,
-  "min_relevance_score": 0.6,
+  "min_relevance_score": 0.002,
   "min_query_term_coverage": 0.6,
   "hit_rate_threshold": 0.9,
   "refusal_threshold": 1.0,
@@ -17,27 +19,107 @@
   "gate_failures": [],
   "per_query": [
     {
-      "query": "How long does standard shipping take?",
+      "query": "What is the free standard shipping minimum after discounts and before tax?",
       "type": "in_corpus",
       "expected_article_ids": [
         "shipping"
       ],
       "ranked_article_ids": [
         "shipping",
-        "returns-refunds",
+        "shipping",
+        "gift-cards",
+        "payment-methods",
+        "returns-refunds"
+      ],
+      "top_score": 0.9866,
+      "query_term_coverage": 0.8333,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "When does an order placed after 2 p.m. Eastern start processing?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "shipping"
+      ],
+      "ranked_article_ids": [
+        "shipping",
+        "shipping",
         "order-tracking",
+        "order-changes",
+        "order-tracking"
+      ],
+      "top_score": 0.9946,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Does expedited shipping skip warehouse processing?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "shipping"
+      ],
+      "ranked_article_ids": [
+        "shipping",
+        "order-tracking",
+        "shipping",
+        "shipping",
+        "order-tracking"
+      ],
+      "top_score": 0.9968,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can Pine and Peak ship to Alaska?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "shipping"
+      ],
+      "ranked_article_ids": [
+        "shipping",
+        "payment-methods",
+        "returns-refunds",
         "damaged-items",
+        "returns-refunds"
+      ],
+      "top_score": 0.9967,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "If an order ships in two parcels, do I pay shipping twice?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "shipping"
+      ],
+      "ranked_article_ids": [
+        "shipping",
+        "shipping",
+        "payment-methods",
+        "order-tracking",
         "order-changes"
       ],
-      "top_score": 0.8289,
-      "query_term_coverage": 0.6667,
+      "top_score": 0.4718,
+      "query_term_coverage": 0.8333,
       "accepted_by_gate": true,
       "hit": 1.0,
       "reciprocal_rank": 1.0,
       "recall": 1.0
     },
     {
-      "query": "Do I get free delivery if my subtotal is $55?",
+      "query": "Can you guarantee delivery tomorrow to a rural address?",
       "type": "in_corpus",
       "expected_article_ids": [
         "shipping"
@@ -46,90 +128,50 @@
         "shipping",
         "payment-methods",
         "order-tracking",
-        "order-changes",
-        "damaged-items"
+        "shipping",
+        "order-tracking"
       ],
-      "top_score": 0.6164,
-      "query_term_coverage": 0.75,
+      "top_score": 0.0029,
+      "query_term_coverage": 0.6,
       "accepted_by_gate": true,
       "hit": 1.0,
       "reciprocal_rank": 1.0,
       "recall": 1.0
     },
     {
-      "query": "Can you ship my order to a PO box using express?",
+      "query": "How long is the ordinary return window after delivery?",
       "type": "in_corpus",
       "expected_article_ids": [
-        "shipping"
+        "returns-refunds"
       ],
       "ranked_article_ids": [
-        "order-tracking",
-        "shipping",
-        "order-changes",
-        "payment-methods",
-        "damaged-items"
+        "damaged-items",
+        "returns-refunds",
+        "returns-refunds",
+        "returns-refunds",
+        "order-changes"
       ],
-      "top_score": 0.6276,
-      "query_term_coverage": 0.6667,
+      "top_score": 0.7906,
+      "query_term_coverage": 1.0,
       "accepted_by_gate": true,
       "hit": 1.0,
       "reciprocal_rank": 0.5,
       "recall": 1.0
     },
     {
-      "query": "Where can I see my parcel tracking link?",
-      "type": "in_corpus",
-      "expected_article_ids": [
-        "order-tracking"
-      ],
-      "ranked_article_ids": [
-        "order-tracking",
-        "order-changes",
-        "account-help",
-        "damaged-items",
-        "payment-methods"
-      ],
-      "top_score": 0.744,
-      "query_term_coverage": 0.75,
-      "accepted_by_gate": true,
-      "hit": 1.0,
-      "reciprocal_rank": 1.0,
-      "recall": 1.0
-    },
-    {
-      "query": "Tracking has not updated since dispatch; what should I do?",
-      "type": "in_corpus",
-      "expected_article_ids": [
-        "order-tracking"
-      ],
-      "ranked_article_ids": [
-        "order-tracking",
-        "order-changes",
-        "damaged-items",
-        "account-help",
-        "returns-refunds"
-      ],
-      "top_score": 0.7575,
-      "query_term_coverage": 0.6667,
-      "accepted_by_gate": true,
-      "hit": 1.0,
-      "reciprocal_rank": 1.0,
-      "recall": 1.0
-    },
-    {
-      "query": "How many days do I have to return an unused item?",
+      "query": "How long do I have to hand a return parcel to the carrier after getting a label?",
       "type": "in_corpus",
       "expected_article_ids": [
         "returns-refunds"
       ],
       "ranked_article_ids": [
         "returns-refunds",
-        "damaged-items",
-        "account-help",
+        "shipping",
         "order-tracking",
-        "order-changes"
+        "returns-refunds",
+        "damaged-items"
       ],
-      "top_score": 0.8153,
+      "top_score": 0.999,
       "query_term_coverage": 0.8333,
       "accepted_by_gate": true,
       "hit": 1.0,
@@ -137,119 +179,100 @@
       "recall": 1.0
     },
     {
-      "query": "When will my card provider post an approved refund?",
+      "query": "Can a final sale item be returned if it arrived defective?",
       "type": "in_corpus",
       "expected_article_ids": [
-        "returns-refunds"
+        "returns-refunds",
+        "product-warranty"
       ],
       "ranked_article_ids": [
         "returns-refunds",
-        "payment-methods",
-        "damaged-items",
-        "order-changes",
-        "gift-cards"
-      ],
-      "top_score": 0.695,
-      "query_term_coverage": 1.0,
-      "accepted_by_gate": true,
-      "hit": 1.0,
-      "reciprocal_rank": 1.0,
-      "recall": 1.0
-    },
-    {
-      "query": "Can I return an item marked final sale?",
-      "type": "in_corpus",
-      "expected_article_ids": [
-        "returns-refunds"
-      ],
-      "ranked_article_ids": [
+        "product-warranty",
         "returns-refunds",
-        "order-changes",
-        "damaged-items",
-        "payment-methods",
-        "order-tracking"
-      ],
-      "top_score": 0.726,
-      "query_term_coverage": 1.0,
-      "accepted_by_gate": true,
-      "hit": 1.0,
-      "reciprocal_rank": 1.0,
-      "recall": 1.0
-    },
-    {
-      "query": "Can I cancel the order while it is still processing?",
-      "type": "in_corpus",
-      "expected_article_ids": [
-        "order-changes"
-      ],
-      "ranked_article_ids": [
-        "order-changes",
-        "damaged-items",
-        "order-tracking",
-        "payment-methods",
-        "returns-refunds"
-      ],
-      "top_score": 0.773,
-      "query_term_coverage": 1.0,
-      "accepted_by_gate": true,
-      "hit": 1.0,
-      "reciprocal_rank": 1.0,
-      "recall": 1.0
-    },
-    {
-      "query": "How do I change an order that has already shipped?",
-      "type": "in_corpus",
-      "expected_article_ids": [
-        "order-changes"
-      ],
-      "ranked_article_ids": [
-        "order-changes",
-        "order-tracking",
-        "damaged-items",
-        "payment-methods",
-        "returns-refunds"
-      ],
-      "top_score": 0.7081,
-      "query_term_coverage": 0.6,
-      "accepted_by_gate": true,
-      "hit": 1.0,
-      "reciprocal_rank": 1.0,
-      "recall": 1.0
-    },
-    {
-      "query": "A product arrived broken. What details should I send?",
-      "type": "in_corpus",
-      "expected_article_ids": [
+        "returns-refunds",
         "damaged-items"
       ],
+      "top_score": 0.8519,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "What is the holiday return deadline for an item delivered on December 10?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "returns-refunds"
+      ],
       "ranked_article_ids": [
-        "damaged-items",
         "returns-refunds",
-        "order-changes",
-        "order-tracking",
+        "returns-refunds",
+        "returns-refunds",
+        "returns-refunds",
         "payment-methods"
       ],
-      "top_score": 0.7841,
-      "query_term_coverage": 0.6,
+      "top_score": 0.4478,
+      "query_term_coverage": 0.8571,
       "accepted_by_gate": true,
       "hit": 1.0,
       "reciprocal_rank": 1.0,
       "recall": 1.0
     },
     {
-      "query": "Should I mail a damaged item back before contacting support?",
+      "query": "Can I return an unused item if I opened the shipping carton?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "returns-refunds"
+      ],
+      "ranked_article_ids": [
+        "returns-refunds",
+        "damaged-items",
+        "damaged-items",
+        "gift-cards",
+        "damaged-items"
+      ],
+      "top_score": 0.9979,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can I return a hygiene product after breaking its protective seal?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "returns-refunds"
+      ],
+      "ranked_article_ids": [
+        "returns-refunds",
+        "returns-refunds",
+        "returns-refunds",
+        "product-warranty",
+        "damaged-items"
+      ],
+      "top_score": 0.9988,
+      "query_term_coverage": 0.8571,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How soon must visible shipping damage be reported?",
       "type": "in_corpus",
       "expected_article_ids": [
         "damaged-items"
       ],
       "ranked_article_ids": [
         "damaged-items",
+        "damaged-items",
+        "product-warranty",
         "returns-refunds",
-        "order-changes",
-        "account-help",
-        "order-tracking"
+        "payment-methods"
       ],
-      "top_score": 0.82,
+      "top_score": 0.9971,
       "query_term_coverage": 0.8333,
       "accepted_by_gate": true,
       "hit": 1.0,
@@ -257,79 +280,19 @@
       "recall": 1.0
     },
     {
-      "query": "Which credit cards can I use at checkout?",
+      "query": "What is the time limit for reporting a hidden defect after discovering it?",
       "type": "in_corpus",
       "expected_article_ids": [
-        "payment-methods"
-      ],
-      "ranked_article_ids": [
-        "payment-methods",
-        "gift-cards",
-        "order-changes",
-        "returns-refunds",
-        "order-tracking"
-      ],
-      "top_score": 0.7975,
-      "query_term_coverage": 0.75,
-      "accepted_by_gate": true,
-      "hit": 1.0,
-      "reciprocal_rank": 1.0,
-      "recall": 1.0
-    },
-    {
-      "query": "Why do I see a pending authorization on my bank account?",
-      "type": "in_corpus",
-      "expected_article_ids": [
-        "payment-methods"
-      ],
-      "ranked_article_ids": [
-        "payment-methods",
-        "account-help",
-        "order-tracking",
-        "gift-cards",
-        "returns-refunds"
-      ],
-      "top_score": 0.6819,
-      "query_term_coverage": 0.8,
-      "accepted_by_gate": true,
-      "hit": 1.0,
-      "reciprocal_rank": 1.0,
-      "recall": 1.0
-    },
-    {
-      "query": "How do I reset my forgotten password?",
-      "type": "in_corpus",
-      "expected_article_ids": [
-        "account-help"
-      ],
-      "ranked_article_ids": [
-        "account-help",
-        "gift-cards",
-        "payment-methods",
-        "returns-refunds",
         "damaged-items"
       ],
-      "top_score": 0.7762,
-      "query_term_coverage": 0.6667,
-      "accepted_by_gate": true,
-      "hit": 1.0,
-      "reciprocal_rank": 1.0,
-      "recall": 1.0
-    },
-    {
-      "query": "What should I do if the reset email does not arrive?",
-      "type": "in_corpus",
-      "expected_article_ids": [
-        "account-help"
-      ],
       "ranked_article_ids": [
-        "account-help",
+        "damaged-items",
         "damaged-items",
         "returns-refunds",
-        "order-changes",
-        "order-tracking"
+        "product-warranty",
+        "product-warranty"
       ],
-      "top_score": 0.7536,
+      "top_score": 0.9407,
       "query_term_coverage": 1.0,
       "accepted_by_gate": true,
       "hit": 1.0,
@@ -337,19 +300,223 @@
       "recall": 1.0
     },
     {
-      "query": "How do I redeem a gift card at checkout?",
+      "query": "Should I send a damaged delivery back before support gives instructions?",
       "type": "in_corpus",
       "expected_article_ids": [
-        "gift-cards"
+        "damaged-items"
       ],
       "ranked_article_ids": [
-        "gift-cards",
-        "payment-methods",
-        "account-help",
+        "damaged-items",
+        "damaged-items",
+        "product-warranty",
         "returns-refunds",
         "damaged-items"
       ],
-      "top_score": 0.7945,
+      "top_score": 0.9777,
+      "query_term_coverage": 0.7143,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Is the return label fee waived when the store sent the wrong product?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "damaged-items",
+        "returns-refunds"
+      ],
+      "ranked_article_ids": [
+        "returns-refunds",
+        "damaged-items",
+        "returns-refunds",
+        "damaged-items",
+        "returns-refunds"
+      ],
+      "top_score": 0.9965,
+      "query_term_coverage": 0.875,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Does the shipping damage reporting deadline shorten the product warranty?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "damaged-items",
+        "product-warranty"
+      ],
+      "ranked_article_ids": [
+        "damaged-items",
+        "damaged-items",
+        "product-warranty",
+        "damaged-items",
+        "returns-refunds"
+      ],
+      "top_score": 0.9959,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How long after ordering can I request cancellation before warehouse picking?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-changes"
+      ],
+      "ranked_article_ids": [
+        "order-changes",
+        "order-changes",
+        "order-changes",
+        "shipping",
+        "order-tracking"
+      ],
+      "top_score": 0.9993,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Does submitting a cancellation request guarantee the order is cancelled?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-changes"
+      ],
+      "ranked_article_ids": [
+        "order-changes",
+        "order-changes",
+        "order-changes",
+        "payment-methods",
+        "shipping"
+      ],
+      "top_score": 0.9975,
+      "query_term_coverage": 0.8333,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can customer support change my delivery address after I submit the order?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-changes"
+      ],
+      "ranked_article_ids": [
+        "shipping",
+        "order-changes",
+        "order-changes",
+        "payment-methods",
+        "order-changes"
+      ],
+      "top_score": 0.9798,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 0.5,
+      "recall": 1.0
+    },
+    {
+      "query": "What can I do if the parcel has already been dispatched and I want to change an item?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-changes",
+        "returns-refunds"
+      ],
+      "ranked_article_ids": [
+        "order-changes",
+        "order-changes",
+        "order-tracking",
+        "returns-refunds",
+        "damaged-items"
+      ],
+      "top_score": 0.9956,
+      "query_term_coverage": 0.875,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can this assistant confirm whether my order is still before warehouse picking?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-changes",
+        "account-help"
+      ],
+      "ranked_article_ids": [
+        "order-changes",
+        "order-changes",
+        "order-changes",
+        "order-tracking",
+        "order-tracking"
+      ],
+      "top_score": 0.8667,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 0.5
+    },
+    {
+      "query": "How long can the first carrier scan take after dispatch?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-tracking"
+      ],
+      "ranked_article_ids": [
+        "order-tracking",
+        "order-tracking",
+        "shipping",
+        "order-tracking",
+        "shipping"
+      ],
+      "top_score": 0.9975,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "When should I contact support if tracking has stopped moving?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-tracking"
+      ],
+      "ranked_article_ids": [
+        "order-tracking",
+        "order-tracking",
+        "account-help",
+        "shipping",
+        "order-changes"
+      ],
+      "top_score": 0.0476,
+      "query_term_coverage": 0.8333,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "A parcel says delivered but is missing; how long should I wait before contacting support?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-tracking"
+      ],
+      "ranked_article_ids": [
+        "order-tracking",
+        "shipping",
+        "order-tracking",
+        "returns-refunds",
+        "order-changes"
+      ],
+      "top_score": 0.9589,
       "query_term_coverage": 0.75,
       "accepted_by_gate": true,
       "hit": 1.0,
@@ -357,20 +524,465 @@
       "recall": 1.0
     },
     {
-      "query": "Can I exchange a gift card balance for cash?",
+      "query": "Do split shipments have separate tracking links?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-tracking"
+      ],
+      "ranked_article_ids": [
+        "order-tracking",
+        "shipping",
+        "payment-methods",
+        "shipping",
+        "order-tracking"
+      ],
+      "top_score": 0.9451,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How many business days is standard transit after carrier pickup?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "order-tracking",
+        "shipping"
+      ],
+      "ranked_article_ids": [
+        "shipping",
+        "order-tracking",
+        "shipping",
+        "order-tracking",
+        "returns-refunds"
+      ],
+      "top_score": 0.9986,
+      "query_term_coverage": 0.8571,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Is a pending bank authorization the same as a completed charge?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "payment-methods"
+      ],
+      "ranked_article_ids": [
+        "payment-methods",
+        "payment-methods",
+        "payment-methods",
+        "shipping",
+        "returns-refunds"
+      ],
+      "top_score": 0.9789,
+      "query_term_coverage": 0.8333,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can a split shipment result in separate payment captures?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "payment-methods"
+      ],
+      "ranked_article_ids": [
+        "payment-methods",
+        "order-tracking",
+        "shipping",
+        "payment-methods",
+        "returns-refunds"
+      ],
+      "top_score": 0.8986,
+      "query_term_coverage": 0.8333,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Who controls when a released card authorization disappears from my bank?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "payment-methods"
+      ],
+      "ranked_article_ids": [
+        "payment-methods",
+        "payment-methods",
+        "returns-refunds",
+        "gift-cards",
+        "payment-methods"
+      ],
+      "top_score": 0.9632,
+      "query_term_coverage": 0.8333,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can I pay the remaining balance with a card after using a gift card?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "payment-methods",
+        "gift-cards"
+      ],
+      "ranked_article_ids": [
+        "gift-cards",
+        "payment-methods",
+        "gift-cards",
+        "gift-cards",
+        "payment-methods"
+      ],
+      "top_score": 0.9816,
+      "query_term_coverage": 0.8333,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can Pine and Peak match the exact price from a competitor?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "payment-methods"
+      ],
+      "ranked_article_ids": [
+        "payment-methods",
+        "order-changes",
+        "returns-refunds",
+        "returns-refunds",
+        "payment-methods"
+      ],
+      "top_score": 0.9985,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How long do providers usually take to post a refund after it is issued?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "payment-methods",
+        "returns-refunds"
+      ],
+      "ranked_article_ids": [
+        "payment-methods",
+        "payment-methods",
+        "returns-refunds",
+        "returns-refunds",
+        "account-help"
+      ],
+      "top_score": 0.9891,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Does a purchased gift card count toward the free shipping merchandise minimum?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "gift-cards",
+        "shipping"
+      ],
+      "ranked_article_ids": [
+        "gift-cards",
+        "shipping",
+        "shipping",
+        "gift-cards",
+        "gift-cards"
+      ],
+      "top_score": 0.9877,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Do Pine and Peak purchased gift cards expire?",
       "type": "in_corpus",
       "expected_article_ids": [
         "gift-cards"
       ],
       "ranked_article_ids": [
         "gift-cards",
-        "payment-methods",
+        "product-warranty",
+        "product-warranty",
         "returns-refunds",
-        "damaged-items",
+        "payment-methods"
+      ],
+      "top_score": 0.9994,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "What proof is needed when reporting a missing purchased gift card?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "gift-cards"
+      ],
+      "ranked_article_ids": [
+        "gift-cards",
+        "gift-cards",
+        "product-warranty",
+        "returns-refunds",
+        "gift-cards"
+      ],
+      "top_score": 0.9176,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can I use a gift card to buy another gift card?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "gift-cards"
+      ],
+      "ranked_article_ids": [
+        "gift-cards",
+        "gift-cards",
+        "payment-methods",
+        "payment-methods",
+        "payment-methods"
+      ],
+      "top_score": 0.9969,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Does returning an item extend an expired promotional credit?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "gift-cards"
+      ],
+      "ranked_article_ids": [
+        "gift-cards",
+        "gift-cards",
+        "gift-cards",
+        "returns-refunds",
+        "returns-refunds"
+      ],
+      "top_score": 0.999,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How long is a password reset link valid?",
+      "type": "in_corpus",
+      "expected_article_ids": [
         "account-help"
       ],
-      "top_score": 0.7532,
+      "ranked_article_ids": [
+        "account-help",
+        "account-help",
+        "damaged-items",
+        "order-changes",
+        "payment-methods"
+      ],
+      "top_score": 0.79,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Will the password reset page reveal whether my email has an account?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "account-help"
+      ],
+      "ranked_article_ids": [
+        "account-help",
+        "account-help",
+        "payment-methods",
+        "damaged-items",
+        "order-changes"
+      ],
+      "top_score": 0.9983,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can requesting another password link invalidate the previous one?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "account-help"
+      ],
+      "ranked_article_ids": [
+        "account-help",
+        "order-changes",
+        "account-help",
+        "payment-methods",
+        "order-changes"
+      ],
+      "top_score": 0.9765,
+      "query_term_coverage": 0.8571,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "What should I do if I lost access to the email address on my account?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "account-help"
+      ],
+      "ranked_article_ids": [
+        "account-help",
+        "account-help",
+        "order-tracking",
+        "order-changes",
+        "damaged-items"
+      ],
+      "top_score": 0.9729,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Can the assistant view my order history or disclose my tracking number?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "account-help",
+        "order-tracking"
+      ],
+      "ranked_article_ids": [
+        "account-help",
+        "order-tracking",
+        "account-help",
+        "returns-refunds",
+        "order-changes"
+      ],
+      "top_score": 0.9973,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "How long is the warranty on a Pine and Peak branded electronic product?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "product-warranty"
+      ],
+      "ranked_article_ids": [
+        "product-warranty",
+        "damaged-items",
+        "returns-refunds",
+        "returns-refunds",
+        "product-warranty"
+      ],
+      "top_score": 0.9998,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "What warranty period applies to Pine and Peak non-electronic accessories?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "product-warranty"
+      ],
+      "ranked_article_ids": [
+        "product-warranty",
+        "damaged-items",
+        "returns-refunds",
+        "product-warranty",
+        "returns-refunds"
+      ],
+      "top_score": 0.9997,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Does the store warranty extend the warranty from another manufacturer?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "product-warranty"
+      ],
+      "ranked_article_ids": [
+        "product-warranty",
+        "returns-refunds",
+        "returns-refunds",
+        "product-warranty",
+        "damaged-items"
+      ],
+      "top_score": 0.9433,
       "query_term_coverage": 0.8,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Is accidental damage or unauthorized repair covered by the limited warranty?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "product-warranty"
+      ],
+      "ranked_article_ids": [
+        "product-warranty",
+        "damaged-items",
+        "damaged-items",
+        "product-warranty",
+        "product-warranty"
+      ],
+      "top_score": 0.9974,
+      "query_term_coverage": 1.0,
+      "accepted_by_gate": true,
+      "hit": 1.0,
+      "reciprocal_rank": 1.0,
+      "recall": 1.0
+    },
+    {
+      "query": "Does an approved warranty replacement restart the original coverage period?",
+      "type": "in_corpus",
+      "expected_article_ids": [
+        "product-warranty"
+      ],
+      "ranked_article_ids": [
+        "product-warranty",
+        "product-warranty",
+        "damaged-items",
+        "product-warranty",
+        "damaged-items"
+      ],
+      "top_score": 0.7343,
+      "query_term_coverage": 1.0,
       "accepted_by_gate": true,
       "hit": 1.0,
       "reciprocal_rank": 1.0,
@@ -379,7 +991,7 @@
     {
       "query": "What is the capital of France?",
       "type": "out_of_corpus",
-      "top_score": 0.4223,
+      "top_score": 0.0001,
       "query_term_coverage": 0.0,
       "refused": true,
       "correct": true
@@ -387,88 +999,113 @@
     {
       "query": "How do I repair a bicycle chain?",
       "type": "out_of_corpus",
-      "top_score": 0.5733,
-      "query_term_coverage": 0.0,
-      "refused": true,
-      "correct": true
-    },
-    {
-      "query": "What is the StoreGuide company headquarters address?",
-      "type": "out_of_corpus",
-      "top_score": 0.5277,
-      "query_term_coverage": 0.5,
-      "refused": true,
-      "correct": true
-    },
-    {
-      "query": "What is the weather tomorrow?",
-      "type": "out_of_corpus",
-      "top_score": 0.4946,
-      "query_term_coverage": 0.0,
-      "refused": true,
-      "correct": true
-    },
-    {
-      "query": "Can you help me choose a university?",
-      "type": "out_of_corpus",
-      "top_score": 0.5277,
+      "top_score": 0.0007,
       "query_term_coverage": 0.3333,
       "refused": true,
       "correct": true
     },
     {
-      "query": "How can I lower my mortgage interest rate?",
+      "query": "What will the weather be in Seattle tomorrow?",
       "type": "out_of_corpus",
-      "top_score": 0.5431,
-      "query_term_coverage": 0.0,
-      "refused": true,
-      "correct": true
-    },
-    {
-      "query": "What is the CEO name and phone number?",
-      "type": "out_of_corpus",
-      "top_score": 0.5455,
-      "query_term_coverage": 0.25,
-      "refused": true,
-      "correct": true
-    },
-    {
-      "query": "Does the store offer appliance installation?",
-      "type": "out_of_corpus",
-      "top_score": 0.5744,
-      "query_term_coverage": 0.0,
-      "refused": true,
-      "correct": true
-    },
-    {
-      "query": "Do you offer gift wrapping?",
-      "type": "out_of_corpus",
-      "top_score": 0.6464,
+      "top_score": 0.0001,
       "query_term_coverage": 0.5,
       "refused": true,
       "correct": true
     },
     {
-      "query": "Can you match a competitor's price?",
+      "query": "Does the company have a retail shop open this Sunday?",
       "type": "out_of_corpus",
-      "top_score": 0.575,
+      "top_score": 0.0004,
+      "query_term_coverage": 0.2,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "What is the company's legal tax identification number?",
+      "type": "out_of_corpus",
+      "top_score": 0.0012,
+      "query_term_coverage": 0.5,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "Can you recommend a university for studying physics?",
+      "type": "out_of_corpus",
+      "top_score": 0.0,
       "query_term_coverage": 0.0,
       "refused": true,
       "correct": true
     },
     {
-      "query": "What hours is your retail shop open?",
+      "query": "How can I lower the interest rate on my mortgage?",
       "type": "out_of_corpus",
-      "top_score": 0.5832,
+      "top_score": 0.0001,
+      "query_term_coverage": 0.0,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "What is the CEO's personal phone number?",
+      "type": "out_of_corpus",
+      "top_score": 0.0,
+      "query_term_coverage": 0.4,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "Do you install appliances in customers' homes?",
+      "type": "out_of_corpus",
+      "top_score": 0.0004,
       "query_term_coverage": 0.25,
       "refused": true,
       "correct": true
     },
     {
-      "query": "How do I troubleshoot an internet router?",
+      "query": "What is the current balance of gift card 123456?",
       "type": "out_of_corpus",
-      "top_score": 0.6338,
-      "query_term_coverage": 0.0,
+      "requires_tool": true,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "Where is my order 84721 right now?",
+      "type": "out_of_corpus",
+      "requires_tool": true,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "Has my order shipped, and what is its tracking number?",
+      "type": "out_of_corpus",
+      "requires_tool": true,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "Please cancel my order 84721 now.",
+      "type": "out_of_corpus",
+      "requires_tool": true,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "Did my refund for order 84721 reach my bank?",
+      "type": "out_of_corpus",
+      "requires_tool": true,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "Am I eligible to return the item I bought last month?",
+      "type": "out_of_corpus",
+      "requires_tool": true,
+      "refused": true,
+      "correct": true
+    },
+    {
+      "query": "Can you change the shipping address on my order?",
+      "type": "out_of_corpus",
+      "requires_tool": true,
       "refused": true,
       "correct": true
     }

@@ -17,10 +17,10 @@ RUN python -m pip install --upgrade pip \
 
 COPY data ./data
 COPY eval ./eval
-RUN mkdir -p /app/logs
+RUN mkdir -p /app/logs /app/model-cache
 
 EXPOSE 8000
-HEALTHCHECK --interval=30s --timeout=8s --start-period=30s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=600s --start-period=600s --retries=3 \
     CMD curl -fsS http://localhost:8000/ready || exit 1
 
 CMD ["python", "-m", "storeguide.server"]
